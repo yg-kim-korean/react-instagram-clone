@@ -1,25 +1,22 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import './App.css';
 import Post from './Post';
+import {db} from './firebase'
 function App() {
-  const [posts, setPosts] = useState([
-    {
-    username:"YG",
-    caption:"wow nice u-jo!",
-    imageUrl:"https://sports-phinf.pstatic.net/20201006_204/1601968337774YF4CX_JPEG/%BD%BA%C6%E4%BC%C8A_670x250.jpg"
-  },
-    {
-      username:"KTYG",
-      caption:"wow nice Messi!!",
-      imageUrl:"https://imgnews.pstatic.net/image/477/2020/12/08/0000275909_001_20201208130634974.jpg?type=w647"
-    },
-    {
-      username:"KTYG",
-      caption:"wow nice Sonny!!",
-      imageUrl:"https://imgnews.pstatic.net/image/413/2020/12/08/0000109958_001_20201208145921933.jpg?type=w647"
-    }
-  ]);
+  const [posts, setPosts] = useState([]);
   
+
+  //useEffect Runs a piece of code based on a specific condition
+  useEffect(() =>{
+    //this is where the code runs
+    db.collection('posts').onSnapshot(snapshot=> {
+      setPosts(snapshot.docs.map(doc=>({
+        id:doc.id,
+        post:doc.data()
+      })));
+    }) // snapshot -> 데이터베이스의 값이 바뀔때마다 
+    //every time a newpost is addded, this code fires...
+  },[]); // 두번째 인자에 값을 넣으면 실행될때마다 값을 바꿔준다.
   return (
     <div className="App">
       <div className="app__header">
@@ -27,8 +24,8 @@ function App() {
       </div>
       <h1>React</h1>  
     {
-      posts.map(post => (
-        <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+      posts.map(({id,post}) => (
+        <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
       ))
     }
    
