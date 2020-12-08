@@ -26,6 +26,9 @@
 .post__comments {
   padding: 20px;
 }
+.post__comment {
+  margin-bottom: 5px;
+}
 .post__commentBox {
   display: flex;
   margin-top: 10px;

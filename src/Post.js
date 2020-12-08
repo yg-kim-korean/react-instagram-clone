@@ -13,7 +13,7 @@ function Post({postId,username, user, caption, imageUrl}) {
             .collection('posts')
             .doc(postId)
             .collection('comments')
-            .orderBy('timestamp','desc')
+            .orderBy('timestamp','asc')
             .onSnapshot((snapshot) => {
                 setComments(snapshot.docs.map((doc)=>doc.data()));
             });
@@ -45,14 +45,14 @@ function Post({postId,username, user, caption, imageUrl}) {
             <div className="post__comments">
             {
                 comments.map((comment) => (
-                    <p>
+                    <p className="post__comment">
                         <b>{comment.username}</b> {comment.text}
                     </p>
                 ))
             }
             </div>
 
-            <form className="post__commentBox">
+            {user && (<form className="post__commentBox">
                 <input className="post__input"
                 type="text"
                 placeholder="Add a comment..."
@@ -62,7 +62,7 @@ function Post({postId,username, user, caption, imageUrl}) {
                     Post
                 </button>
             </form>
-            
+            )}
         </div>
     )
 }
