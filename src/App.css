@@ -22,3 +22,11 @@
   display: flex;
   flex-direction: column;
 }
+
+.app__posts {
+  padding: 10px;
+  display: flex;
+}
+.app__postRight {
+  margin-left: 10px;
+}
