@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import { Button, Input } from '@material-ui/core';
 import ImageUpload from './ImageUpload';
-import InstagramEmbed from 'react-instagram-embed';
+// import InstagramEmbed from 'react-instagram-embed';
 
 function getModalStyle() {
   const top = 50;
@@ -47,7 +47,7 @@ function App() {
     const unsubscribe =  auth.onAuthStateChanged((authUser) => {
       if (authUser){
         //로그인된 상태면
-        console.log(authUser);
+        // console.log(authUser);
         setUser(authUser);
       }
       else{
@@ -160,7 +160,7 @@ function App() {
           ))
         }
       </div>
-      <div className="app__postRight">
+      {/* <div className="app__postRight">
                 <InstagramEmbed
             url='https://www.instagram.com/p/CCDVHKvhXIn/?utm_source=ig_web_copy_link'
             maxWidth={320}
@@ -173,7 +173,7 @@ function App() {
             onAfterRender={() => {}}
             onFailure={() => {}}
           />
-      </div>
+      </div> */}
       </div>
       
     
